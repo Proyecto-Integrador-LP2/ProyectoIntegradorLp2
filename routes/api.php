@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GradoController;
+use App\Http\Controllers\CursoController;
 use App\Http\Controllers\RegisterController;
 
 /*
@@ -21,6 +22,7 @@ Route::post('login', [RegisterController::class, 'login']);
      
 Route::middleware('auth:api')->group( function () {
 Route::resource('grados', GradoController::class);
+Route::resource('cursos', CursoController::class);
  
     
 });
