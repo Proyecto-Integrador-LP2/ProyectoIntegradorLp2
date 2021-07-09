@@ -15,5 +15,6 @@ class Curso extends Model
     ];
      protected $table='curso';
      protected $primaryKey= 'curso_id';
+    
      public $timestamps = false;
 }
