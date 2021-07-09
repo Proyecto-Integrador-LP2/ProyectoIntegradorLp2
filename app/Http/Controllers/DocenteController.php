@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Grado;
+use App\Models\Docente;
 use Validator;
-use App\Http\Resources\grado as gradoresource;
+use App\Http\Resources\docente as docenteresource;
 
-class GradoController extends BaseController
+class DocenteController extends BaseController
 {
-	/**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $Grados = Grado::all();
+        $Docentes = Docente::all();
 
-        return $this->sendResponse(gradoresource::collection($Grados), 'Listado de Grados.');
+        return $this->sendResponse(docenteresource::collection($Docentes), 'Listado de Docentes.');
     }
     /**
      * Store a newly created resource in storage.
@@ -32,17 +32,18 @@ class GradoController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'nom_grado' => 'required',
-            'desc_grado' => 'required'
+            'user_id' => 'required',
+            'docente_cod_docente' => 'required',
+            'docente_descripcion' => 'required'
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $grado = Grado::create($input);
+        $docente = Docente::create($input);
 
-        return $this->sendResponse(new gradoresource($grado), 'Ya se ha registrado.');
+        return $this->sendResponse(new docenteresource($docente), 'Ya se ha registrado.');
     }
 
     /**
@@ -53,13 +54,13 @@ class GradoController extends BaseController
      */
     public function show($id)
     {
-        $grado = Grado::find($id);
+        $docente = Docente::find($id);
 
-        if (is_null($grado)) {
+        if (is_null($docente)) {
             return $this->sendError('Product not found.');
         }
 
-        return $this->sendResponse(new gradoresource($grado), 'Product retrieved successfully.');
+        return $this->sendResponse(new docenteresource($docente), 'Product retrieved successfully.');
     }
 
     /**
@@ -72,21 +73,23 @@ class GradoController extends BaseController
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $grado=Grado::findOrFail($id);
+        $docente=Docente::findOrFail($id);
         $validator = Validator::make($input, [
-            'nom_grado' => 'required',
-            'desc_grado' => 'required'
+            'user_id' => 'required',
+            'docente_cod_docente' => 'required',
+            'docente_descripcion' => 'required'
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $grado->nom_grado = $input['nom_grado'];
-        $grado->desc_grado = $input['desc_grado'];
-        $grado->save();
+        $docente->user_id = $input['user_id'];
+        $docente->docente_cod_docente = $input['docente_cod_docente'];
+        $docente->docente_descripcion = $input['docente_descripcion'];
+        $docente->save();
 
-        return $this->sendResponse(new gradoresource($grado), 'Product updated successfully.');
+        return $this->sendResponse(new docenteresource($docente), 'Product updated successfully.');
     }
 
     /**
@@ -97,8 +100,8 @@ class GradoController extends BaseController
      */
     public function destroy($id)
     {
-    	$grado=Grado::findOrFail($id);
-        $grado->delete();
+    	$docente=Docente::findOrFail($id);
+        $docente->delete();
 
         return $this->sendResponse([], 'Product deleted successfully.');
     }
