@@ -18,9 +18,9 @@ use App\Http\Controllers\RegisterController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
-     
+Route::resource('grados', GradoController::class);     
 Route::middleware('auth:api')->group( function () {
-Route::resource('grados', GradoController::class);
+
  
     
 });

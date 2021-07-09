@@ -16,6 +16,7 @@ class grado extends JsonResource
     {
         return [
             'id' => $this->id,
+            'nivel' => $this->nivel,
             'nom_grado' => $this->nom_grado,
             'desc_grado' => $this->desc_grado,
         ];

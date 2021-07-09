@@ -19,7 +19,7 @@ class GradoController extends BaseController
     {
         $Grados = Grado::all();
 
-        return $this->sendResponse(gradoresource::collection($Grados), 'Products retrieved successfully.');
+        return $this->sendResponse(gradoresource::collection($Grados), 'Listado de Grados.');
     }
     /**
      * Store a newly created resource in storage.
@@ -42,7 +42,7 @@ class GradoController extends BaseController
 
         $grado = Grado::create($input);
 
-        return $this->sendResponse(new gradoresource($grado), 'Product created successfully.');
+        return $this->sendResponse(new gradoresource($grado), 'Ya se ha registrado.');
     }
 
     /**
